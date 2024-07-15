@@ -14,30 +14,33 @@ export const components = {
 
 ## Tabla de contenido
 
-1.  [Concepto](/blog/sap-mm-registro-info-compras#concepto)
-2.  [Crear registro info](/blog/sap-mm-registro-info-compras#crear-registro-info)
+2.  [Registro info](/blog/sap-mm-registro-info-compras#registro-info)
 3.  [Visualizar lista por material](/blog/sap-mm-registro-info-compras#visualizar-lista-por-material)
 4.  [Registro info en pedido](/blog/sap-mm-registro-info-compras#registro-info-en-pedido)
 5.  [Transacciones](/blog/sap-mm-registro-info-compras#transacciones)
 
-## Concepto
+## Registro info
 
 El registro info `Info Record` es la relación documentada entre un proveedor y un material. Cuando los usuarios crean documentos de compras, los datos del registro de info se transfieren al documento de compras como valores predeterminados.
 
-## Crear registro info
+### Crear registro info
 
 Código de transacción `MM11`
 
-Acceso
+#### Acceso
+
 ![ME11 Acceso](https://res.cloudinary.com/jaular/image/upload/v1720811082/blog/sap-mm-registro-info-compras/me11-01_fdhflg.png "ME11 Acceso")
 
-Datos generales
+#### Datos generales
+
 ![ME11 Datos generales](https://res.cloudinary.com/jaular/image/upload/v1720811082/blog/sap-mm-registro-info-compras/me11-02_bqruy1.png "ME11 Datos generales")
 
-Datos de organización de compras 1
+#### Datos de organización de compras 1
+
 ![ME11 Datos de organización de compras 1](https://res.cloudinary.com/jaular/image/upload/v1720811241/blog/sap-mm-registro-info-compras/me11-03_q6ojce.png "ME11 Datos de organización de compras 1")
 
-Condiciones / Modificar precio bruto
+#### Condiciones / Modificar precio bruto
+
 ![ME11 Condiciones](https://res.cloudinary.com/jaular/image/upload/v1720811241/blog/sap-mm-registro-info-compras/me11-04_vdqbeh.png "ME11 Condiciones")
 
 ## Visualizar lista por material
@@ -54,6 +57,6 @@ Código de transacción `ME21N`
 
 ## Transacciones
 
-- `ME11 /2-3` Registro info
+- `ME11 /12-13` Registro info
 - `ME1M` Registro info / Visualizar lista por material
 - `ME21N` Pedido
