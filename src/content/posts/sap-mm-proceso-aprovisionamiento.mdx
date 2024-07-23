@@ -16,18 +16,19 @@ export const components = {
 
 1.  [Crear solicitud de pedido](/blog/sap-mm-proceso-aprovisionamiento#crear-solicitud-de-pedido)
 2.  [Liberar solicitud de pedido](/blog/sap-mm-proceso-aprovisionamiento#liberar-solicitud-de-pedido)
-3.  [Crear pedido](/blog/sap-mm-proceso-aprovisionamiento#crear-pedido)
-4.  [Liberar pedido](/blog/sap-mm-proceso-aprovisionamiento#liberar-pedido)
-5.  [Entrada de mercancías de pedido](/blog/sap-mm-proceso-aprovisionamiento#entrada-de-mercancías-de-pedido)
-6.  [Resumen de stock (Opcional)](/blog/sap-mm-proceso-aprovisionamiento#resumen-de-stock-opcional)
-7.  [Documentos de compras por número de documento (Opcional)](/blog/sap-mm-proceso-aprovisionamiento#documentos-de-compras-por-número-de-documento-opcional)
-8.  [Lista documentos material (Opcional)](/blog/sap-mm-proceso-aprovisionamiento#lista-documentos-material-opcional)
-9.  [Visualizar stocks en almacén por material (Opcional)](/blog/sap-mm-proceso-aprovisionamiento#visualizar-stocks-en-almacén-por-material-opcional)
-10. [Crear reserva](/blog/sap-mm-proceso-aprovisionamiento#crear-reserva)
-11. [Lista de reservas gestión de stocks (Opcional)](/blog/sap-mm-proceso-aprovisionamiento#lista-de-reservas-gestión-de-stocks-opcional)
-12. [Salida de mercancías reserva](/blog/sap-mm-proceso-aprovisionamiento#salida-de-mercancías-reserva)
-13. [Lista de necesidades stock (Opcional)](/blog/sap-mm-proceso-aprovisionamiento#lista-de-necesidades-stock-opcional)
-14. [Transacciones](/blog/sap-mm-proceso-aprovisionamiento#transacciones)
+3.  [Visualizar lista solicitudes de pedido (Opcional)](/blog/sap-mm-proceso-aprovisionamiento#visualizar-lista-solicitudes-de-pedido-opcional)
+4.  [Crear pedido](/blog/sap-mm-proceso-aprovisionamiento#crear-pedido)
+5.  [Liberar pedido](/blog/sap-mm-proceso-aprovisionamiento#liberar-pedido)
+6.  [Entrada de mercancías de pedido](/blog/sap-mm-proceso-aprovisionamiento#entrada-de-mercancías-de-pedido)
+7.  [Resumen de stock (Opcional)](/blog/sap-mm-proceso-aprovisionamiento#resumen-de-stock-opcional)
+8.  [Documentos de compras por número de documento (Opcional)](/blog/sap-mm-proceso-aprovisionamiento#documentos-de-compras-por-número-de-documento-opcional)
+9.  [Lista documentos material (Opcional)](/blog/sap-mm-proceso-aprovisionamiento#lista-documentos-material-opcional)
+10. [Visualizar stocks en almacén por material (Opcional)](/blog/sap-mm-proceso-aprovisionamiento#visualizar-stocks-en-almacén-por-material-opcional)
+11. [Crear reserva](/blog/sap-mm-proceso-aprovisionamiento#crear-reserva)
+12. [Lista de reservas gestión de stocks (Opcional)](/blog/sap-mm-proceso-aprovisionamiento#lista-de-reservas-gestión-de-stocks-opcional)
+13. [Salida de mercancías reserva](/blog/sap-mm-proceso-aprovisionamiento#salida-de-mercancías-reserva)
+14. [Lista de necesidades stock (Opcional)](/blog/sap-mm-proceso-aprovisionamiento#lista-de-necesidades-stock-opcional)
+15. [Transacciones](/blog/sap-mm-proceso-aprovisionamiento#transacciones)
 
 ## Crear solicitud de pedido
 
@@ -43,6 +44,13 @@ Código de transacción `ME51N`
 
 Código de transacción `ME54N`
 ![ME54N - 1](https://res.cloudinary.com/jaular/image/upload/v1719503359/blog/sap-procesos-aprovisionamiento/me54n-1_oqzwex.png "ME54N - 1")
+
+## Visualizar lista solicitudes de pedido (Opcional)
+
+Código de transacción `ME5A`
+![ME5A - 1](https://res.cloudinary.com/jaular/image/upload/v1721313869/blog/sap-procesos-aprovisionamiento/me5a-1_mz9gq8.png "ME5A - 1")
+
+![ME5A - 2](https://res.cloudinary.com/jaular/image/upload/v1721314362/blog/sap-procesos-aprovisionamiento/me5a-2_dcfr6m.png "ME5A - 2")
 
 ## Crear pedido
 
@@ -109,6 +117,7 @@ Código de transacción `MD04`
 
 - `ME51N /52N-53N` Solicitud de pedido
 - `ME54N` Liberar solicitud de pedido
+- `ME5A` Visualizar lista solicitudes de pedido (Opcional)
 - `ME21N /22N-23N` Pedido
 - `ME29N` Liberar pedido
 - `MIGO` Entrada de mercancías de pedido
