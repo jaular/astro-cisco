@@ -1,0 +1,246 @@
+---
+title: SAP PM Objectos técnicos
+publishDate: "2024-08-01T00:00:00"
+author: José Aular
+tag: sap
+---
+
+import CustomLink from "~/components/CustomLink.astro";
+import CustomImage from "~/components/CustomImage.astro";
+import CustomTable from "~/components/CustomTable.astro";
+
+export const components = {
+  a: CustomLink,
+  img: CustomImage,
+  table: CustomTable,
+};
+
+## Tabla de contenido
+
+1.  [Clase y Características](/blog/sap-pm-objectos-tecnicos#clase-y-características)
+2.  [Puesto de trabajo](/blog/sap-pm-objectos-tecnicos#puesto-de-trabajo)
+3.  [Ubicación técnica](/blog/sap-pm-objectos-tecnicos#ubicación-técnica)
+4.  [Equipo](/blog/sap-pm-objectos-tecnicos#equipo)
+5.  [Transacciones](/blog/sap-pm-objectos-tecnicos#transacciones)
+6.  [Referencias](/blog/sap-pm-objectos-tecnicos#referencias)
+
+## Clase y Características
+
+Una clase `Class` es una colección de características `Characteristics`. Se asigna una clase a un objeto, como un equipo o una ubicación técnica. Cada característica de la clase se puede definir como texto, número, cadena de caracteres, fecha, etc.
+
+### Crear característica
+
+Código de transacción `CT04`
+
+![CT04 Gestión de características](https://res.cloudinary.com/jaular/image/upload/v1721668665/blog/sap-pm-objectos-tecnicos/ct04-1_htjqf9.png "CT04 Gestión de características")
+
+#### Datos básicos
+
+![CT04 Datos básicos](https://res.cloudinary.com/jaular/image/upload/v1721668665/blog/sap-pm-objectos-tecnicos/ct04-2_ba3flo.png "CT04 Datos básicos")
+
+#### Valores
+
+![CT04 Valores](https://res.cloudinary.com/jaular/image/upload/v1721668665/blog/sap-pm-objectos-tecnicos/ct04-3_ptyoyy.png "CT04 Valores")
+
+### Crear clase
+
+Código de transacción `CL01`
+
+![CL01 Crear clase](https://res.cloudinary.com/jaular/image/upload/v1721669167/blog/sap-pm-objectos-tecnicos/cl01-_xqvuae.png "CL01 Crear clase")
+
+#### Datos básicos
+
+![CL01 Datos básicos](https://res.cloudinary.com/jaular/image/upload/v1721669167/blog/sap-pm-objectos-tecnicos/cl01-2_gzabsv.png "CL01 Datos básicos")
+
+#### Características
+
+![CL01 Características](https://res.cloudinary.com/jaular/image/upload/v1721669167/blog/sap-pm-objectos-tecnicos/cl01-3_gf1vjb.png "CL01 Características")
+
+## Puesto de trabajo
+
+Los puestos de trabajo `Work Center` son grupos de personas o técnicos que realizan físicamente la actividad
+de mantenimiento en diferentes áreas como mecánica, eléctrica, instrumentación, etc. Desde una perspectiva de mantenimiento, un puesto de trabajo representa a una persona individual o un taller, es decir, un grupo de personas.
+
+> Evite utilizar personas individuales como puestos de trabajo. Podrías poner en peligro tus posibilidades de planificación de capacidad.
+
+### Crear puesto de trabajo
+
+Código de transacción `IR01`
+
+La `Clase puesto de trabajo / Work Center Category` estándar para mantenimiento de planta es **0005**.
+
+![IR01 Acceso](https://res.cloudinary.com/jaular/image/upload/v1722002564/blog/sap-pm-objectos-tecnicos/ir01-1_qjq4ib.png "IR01 Acceso")
+
+#### Datos básicos
+
+En `Utilización de Hoja de Ruta / Usage` asegúrese de ingresar la **004** (Sólo hojas de rutas para mantenimiento) o **009** (Todos los tipos de hojas de ruta), para que el puesto de trabajo pueda usarse en el proceso de mantenimiento.
+
+La `Clave de valor prefijado / Standard value key` debe establecerse en **SAP0** (Sin valores prefijados), para que los valores estándar como tiempos de preparación o tiempos de máquina no sean necesarios más adelante.
+
+![IR01 Datos básicos](https://res.cloudinary.com/jaular/image/upload/v1722002564/blog/sap-pm-objectos-tecnicos/ir01-2_icxpjq.png "IR01 Datos básicos")
+
+#### Valores propuestos
+
+Mediante la `Clave de control / Control key` se pueden controlar detalladamente las funciones de negocio que debe tener una operación (costo, impresión, confirmación, asignación externa, programación, etc.).
+Necesita al menos dos claves de control, es decir, una clave para el procesamiento interno (**PM01**) y una clave para procesamiento externo (**PM02**). Se pueden utilizar otras claves de control según sea necesario.
+
+![IR01 Valores propuestos](https://res.cloudinary.com/jaular/image/upload/v1722002565/blog/sap-pm-objectos-tecnicos/ir01-3_f1hlcv.png "IR01 Valores propuestos")
+
+#### Capacidades
+
+Si posteriormente desea ejecutar la planificación de capacidad para su puesto de trabajo, su puesto de trabajo requiere una fórmula en el campo `Fórmula otras / Other Formula`. En el sistema estándar, esta fórmula es **SAP008** (Proy.: nec. ElabProp).
+
+![IR01 Capacidades](https://res.cloudinary.com/jaular/image/upload/v1722002565/blog/sap-pm-objectos-tecnicos/ir01-4_wkfnkr.png "IR01 Capacidades")
+
+Sin considerar las ordenes no planificadas, una tasa de `Capacidad utilizada / Capacity Utilization` de entre el **65%**
+y el **75%** es el más común en la práctica.
+
+![IR01 Capacidades cabecera](https://res.cloudinary.com/jaular/image/upload/v1722519582/blog/sap-pm-objectos-tecnicos/ir01-5_oj43sn.png "IR01 Capacidades cabecera")
+
+#### Programación
+
+Si desea programar las ordenes, su puesto de trabajo requiere una fórmula en el campo `Otra fórmula / Int. Proc. Durat`. La fórmula **SAP004** (Durac. ElaborPropia) es definido en la versión estándar de SAP.
+
+![IR01 Programación](https://res.cloudinary.com/jaular/image/upload/v1722519582/blog/sap-pm-objectos-tecnicos/ir01-6_nkpfnq.png "IR01 Programación")
+
+#### Cálculo coste
+
+Si posteriormente desea realizar el cálculo del coste para su puesto de trabajo, su puesto de trabajo requiere lo siguiente:
+
+- Un `Centro de coste / Cost Center`.
+- Una `ClsAct ElaborPropia / ActType Int.Proc.`.
+- Una fórmula para los requisitos para procesamiento interno. En el sistema estándar se utiliza la fórmula **SAP008** (Proy.: nec. ElabProp).
+
+![IR01 Cálculo coste](https://res.cloudinary.com/jaular/image/upload/v1722519977/blog/sap-pm-objectos-tecnicos/ir01-7_o5qack.png "IR01 Cálculo coste")
+
+## Ubicación técnica
+
+Una ubicación técnica `Functional Location` representa el lugar en el que se debe realizar una tarea de mantenimiento y el área en la que se puede instalar objetos (como motores, cajas de cambios, bombas, etc.).
+
+Los ejemplos prácticos incluyen los siguientes:
+
+- Plantas de proceso en la industria química, farmacéutica y alimentaria.
+- Infraestructura como carreteras, lugares públicos, vías, túneles y puentes.
+- Sistemas de energía, gas, agua y calefacción.
+- Red de computadoras.
+
+### Crear ubicación técnica
+
+Código de transacción `IL01`
+
+![IL01 Acceso](https://res.cloudinary.com/jaular/image/upload/v1722453078/blog/sap-pm-objectos-tecnicos/il01-1_rmrlg6.png "IL01 Acceso")
+
+#### Emplazamiento
+
+![IL01 Emplazamiento](https://res.cloudinary.com/jaular/image/upload/v1722453078/blog/sap-pm-objectos-tecnicos/il01-2_tbl8tr.png "IL01 Emplazamiento")
+
+#### Organización
+
+El `Pto.tbjo.res / Main WorkCtr` es el puesto de trabajo que se encarga de realizar una tarea de mantenimiento.
+
+![IL01 Organización](https://res.cloudinary.com/jaular/image/upload/v1722453078/blog/sap-pm-objectos-tecnicos/il01-3_nvz6n6.png "IL01 Organización")
+
+#### Estructura
+
+Para que pueda instalar un equipo en una ubicación técnica, debe seleccionar la casilla de verificación `Montaje permitido / Equip-installation allwd`. Además, si solo desea instalar un equipo en un momento determinado, también seleccione la casilla de verificación `Montaje individual / Single installation`.
+
+Puede utilizar el campo `Posición / Position` para organizar las ubicaciones técnicas y los equipos. La mejor opción es utilizar 4 dígitos (por ejemplo, "0001" en lugar de "1" o "0030" en lugar de "30").
+
+![IL01 Estructura](https://res.cloudinary.com/jaular/image/upload/v1722453078/blog/sap-pm-objectos-tecnicos/il01-4_ncpsd0.png "IL01 Estructura")
+
+### Representación de estructura para ubicación tecnica (Opcional)
+
+![IH01 Lista de estructura](https://res.cloudinary.com/jaular/image/upload/v1722453528/blog/sap-pm-objectos-tecnicos/ih01-1_lk1b4z.png "IH01 Lista de estructura")
+
+## Equipo
+
+El equipo `Equipment` representa un objeto físico que se puede mantener de forma independiente en la industria. El equipo es un activo que se puede trasladar de un lugar a otro.
+
+Por ejemplo, el equipo podría incluir lo siguiente:
+
+- Máquinas.
+- Medios de producción (bombas y motores).
+- Recursos/herramientas de producción (PRT).
+- Equipos de prueba (básculas y medidores).
+- Objetos de flota (coches, camiones, carretillas elevadoras y vehículos industriales).
+- Inventarios de TI (PC, impresoras, monitores, portátiles y proyectores).
+- Robots.
+
+### Crear equipo
+
+Código de transacción `IE01`
+
+Los tipos de equipos estándar comúnmente utilizados son:
+
+| Código | Descripción       |
+| ------ | ----------------- |
+| M      | Máquinas          |
+| V      | Vehículos         |
+| E      | Equipo principal  |
+| F      | Sistema agrupador |
+| R      | Componente        |
+
+![IE01 Acceso](https://res.cloudinary.com/jaular/image/upload/v1722456689/blog/sap-pm-objectos-tecnicos/ie01-1_wipjpp.png "IE01 Acceso")
+
+#### Datos generales
+
+![IE01 Datos generales](https://res.cloudinary.com/jaular/image/upload/v1722456689/blog/sap-pm-objectos-tecnicos/ie01-2_e5e2d0.png "IE01 Datos generales")
+
+#### Emplazamiento
+
+![IE01 Emplazamiento](https://res.cloudinary.com/jaular/image/upload/v1722457481/blog/sap-pm-objectos-tecnicos/ie01-3_pf1ln6.png "IE01 Emplazamiento")
+
+#### Organización
+
+![IE01 Organización](https://res.cloudinary.com/jaular/image/upload/v1722457482/blog/sap-pm-objectos-tecnicos/ie01-4_haq1ea.png "IE01 Organización")
+
+#### Estructura
+
+![IE01 Estructura](https://res.cloudinary.com/jaular/image/upload/v1722457483/blog/sap-pm-objectos-tecnicos/ie01-5_wbgqb3.png "IE01 Estructura")
+
+#### Clasificación
+
+Acceso: `Resumen clases / Class overview`
+
+![IE01 Clasificación](https://res.cloudinary.com/jaular/image/upload/v1722457481/blog/sap-pm-objectos-tecnicos/ie01-6_rpkq2h.png "IE01 Clasificación")
+
+#### Dat. serie
+
+Si desea utilizar la función para guardar o retirar el equipo del almacen, debe agregar el número de serie al equipo.
+
+Acceso: `Tratar / Edit` -> `Selección de vistas / View Selection` -> `Número de serie / Serial numbers`
+
+![IE01 Dat. serie](https://res.cloudinary.com/jaular/image/upload/v1722524152/blog/sap-pm-objectos-tecnicos/ie01-7_j7akb0.png "IE01 Dat. serie")
+
+En la pestaña de **Dat.ce./Almacenam.2** del material, ingrese en el campo `NivSerial / Serlevel` si el número de serie y el número de equipo deben sincronizarse.
+
+#### Lista de empleos
+
+Acceso: `Detalles / Extras` -> `Lista de empleos / Usage List`
+
+![IE01 Lista de empleos](https://res.cloudinary.com/jaular/image/upload/v1722525504/blog/sap-pm-objectos-tecnicos/ie01-8_b10pbp.png "IE01 Lista de empleos")
+
+### Diferencias - ubicación técnica y equipo
+
+Estas son algunas diferencias entre las ubicaciones técnicas y los equipos:
+
+- Las ubicaciones técnicas no se pueden almacenar, mientras que los equipos se pueden almacenar usando números de serie.
+- El equipo tiene una asignación de número interno y externo, mientras que el número de una ubicación técnica sólo se asigna externamente.
+- Se puede modificar el número de una ubicación técnica, mientras que el número de un equipo siempre está asignado de forma permanente.
+
+## Transacciones
+
+- `CT04` Gestión de características
+- `CL01 /02-03` Clase
+- `IR01 /02-03` Puesto de trabajo
+- `IL01 /02-03` Ubicación técnica
+- `IH01` Representación de estructura para ubicación tecnica (Opcional)
+- `IL07` Lista ubicaciones técnicas (Opcional)
+- `IE01 /02-03` Equipo
+- `IE4N` Equipo - Desmontaje/Montaje con movimiento de mercancías (Opcional)
+
+## Referencias
+
+- [Plant Maintenance with SAP S/4HANA](https://www.sap-press.com/plant-maintenance-with-sap-s4hana-business-user-guide_5180/)
+- [ERProof](https://erproof.com/)
+- [SAP Help Portal](https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e98c7c41bbe8439e90daa5c114a7573b/59bdb853dcfcb44ce10000000a174cb4.html)
