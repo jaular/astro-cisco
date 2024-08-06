@@ -1,0 +1,108 @@
+---
+title: SAP MM Traspaso y traslado de material
+publishDate: "2024-08-07T00:00:00"
+author: José Aular
+tag: sap
+---
+
+import CustomLink from "~/components/CustomLink.astro";
+import CustomImage from "~/components/CustomImage.astro";
+
+export const components = {
+  a: CustomLink,
+  img: CustomImage,
+};
+
+## Tabla de contenido
+
+1.  [Libre utilización a control de calidad](/blog/sap-mm-traspaso-traslado-material#libre-utilización-a-control-de-calidad)
+2.  [Control de calidad a libre utilización](/blog/sap-mm-traspaso-traslado-material#control-de-calidad-a-libre-utilización)
+3.  [Libre utilización a bloqueado](/blog/sap-mm-traspaso-traslado-material#libre-utilización-a-bloqueado)
+4.  [Bloqueado a libre utilización](/blog/sap-mm-traspaso-traslado-material#bloqueado-a-libre-utilización)
+5.  [Control de calidad a bloqueado](/blog/sap-mm-traspaso-traslado-material#control-de-calidad-a-bloqueado)
+6.  [Bloqueado a control de calidad](/blog/sap-mm-traspaso-traslado-material#bloqueado-a-control-de-calidad)
+7.  [Traspaso de material a material](/blog/sap-mm-traspaso-traslado-material#traspaso-de-material-a-material)
+8.  [Traslado de centro a centro en un paso](/blog/sap-mm-traspaso-traslado-material#traslado-de-centro-a-centro-en-un-paso)
+9.  [Traslado de centro a centro en dos pasos](/blog/sap-mm-traspaso-traslado-material#traslado-de-centro-a-centro-en-dos-pasos)
+10. [Traslado de almacen a almacen en un paso](/blog/sap-mm-traspaso-traslado-material#traslado-de-almacen-a-almacen-en-un-paso)
+11. [Transacciones](/blog/sap-mm-traspaso-traslado-material#transacciones)
+
+## Libre utilización a control de calidad
+
+Clase de movimiento `322` - reverso `321`
+
+![MIGO Libre utilización a control de calidad](https://res.cloudinary.com/jaular/image/upload/v1722958137/blog/sap-mm-traspaso-traslado-material/migo-322_auqffo.png "MIGO Libre utilización a control de calidad")
+
+## Control de calidad a libre utilización
+
+Clase de movimiento `321` - reverso `322`
+
+Ingresar el código correspondiente en el campo `Motivo de movimiento / Reason for Movement`, ejemplo: **0003**.
+
+![MIGO Control de calidad a libre utilización](https://res.cloudinary.com/jaular/image/upload/v1722958577/blog/sap-mm-traspaso-traslado-material/migo-321_ja51a9.png "MIGO Control de calidad a libre utilización")
+
+## Libre utilización a bloqueado
+
+Clase de movimiento `344` - reverso `343`
+
+![MIGO Libre utilización a bloqueado](https://res.cloudinary.com/jaular/image/upload/v1722959198/blog/sap-mm-traspaso-traslado-material/migo-344_ci6kum.png "MIGO Libre utilización a bloqueado")
+
+## Bloqueado a libre utilización
+
+Clase de movimiento `343` - reverso `344`
+
+![MIGO Bloqueado a Libre utilización](https://res.cloudinary.com/jaular/image/upload/v1722959433/blog/sap-mm-traspaso-traslado-material/migo-343_iipwpg.png "MIGO Bloqueado a Libre utilización")
+
+## Control de calidad a bloqueado
+
+Clase de movimiento `350` - reverso `349`
+
+![MIGO Control de calidad a bloqueado](https://res.cloudinary.com/jaular/image/upload/v1722965402/blog/sap-mm-traspaso-traslado-material/migo-350_uevypl.png "MIGO Control de calidad a bloqueado")
+
+## Bloqueado a control de calidad
+
+Clase de movimiento `349` - reverso `350`
+
+Ingresar el código correspondiente en el campo `Motivo de movimiento / Reason for Movement`, ejemplo: **0001**.
+
+![MIGO Bloqueado a control de calidad](https://res.cloudinary.com/jaular/image/upload/v1722965719/blog/sap-mm-traspaso-traslado-material/migo-349_qbszqu.png "MIGO Bloqueado a control de calidad")
+
+## Traspaso de material a material
+
+Clase de movimiento `309`
+
+> Ambos materiales deben tener la misma unidad de almacenamiento.
+
+Ingresar el código correspondiente en el campo `Motivo de movimiento / Reason for Movement`, ejemplo: **0001**.
+
+![MIGO Traspaso de material a material](https://res.cloudinary.com/jaular/image/upload/v1722966078/blog/sap-mm-traspaso-traslado-material/migo-309_py297e.png "MIGO Traspaso de material a material")
+
+## Traslado de centro a centro en un paso
+
+Clase de movimiento `301`
+
+![MIGO Traslado de centro a centro en un paso](https://res.cloudinary.com/jaular/image/upload/v1722970732/blog/sap-mm-traspaso-traslado-material/migo-301_jekgkj.png "MIGO Traslado de centro a centro en un paso")
+
+## Traslado de centro a centro en dos pasos
+
+### Traslado de centro a centro (Salida)
+
+Clase de movimiento `303`
+
+![MIGO Traslado de centro a centro (Salida)](https://res.cloudinary.com/jaular/image/upload/v1722971188/blog/sap-mm-traspaso-traslado-material/migo-303_itn5lx.png "MIGO Traslado de centro a centro (Salida)")
+
+### Traslado de centro a centro (Entrada)
+
+Clase de movimiento `305`
+
+![MIGO Traslado de centro a centro (Entrada)](https://res.cloudinary.com/jaular/image/upload/v1722971188/blog/sap-mm-traspaso-traslado-material/migo-305_nd6kef.png "MIGO Traslado de centro a centro (Entrada)")
+
+## Traslado de almacen a almacen en un paso
+
+Clase de movimiento `311`
+
+![MIGO Traslado de almacen a almacen en un paso](https://res.cloudinary.com/jaular/image/upload/v1722972076/blog/sap-mm-traspaso-traslado-material/migo-311_iuv8y7.png "MIGO Traslado de almacen a almacen en un paso")
+
+## Transacciones
+
+- `MIGO` Movimiento de mercancías
