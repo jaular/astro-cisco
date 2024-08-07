@@ -26,6 +26,7 @@ export const components = {
 9.  [Traslado de centro a centro en dos pasos](/blog/sap-mm-traspaso-traslado-material#traslado-de-centro-a-centro-en-dos-pasos)
 10. [Traslado de almacen a almacen en un paso](/blog/sap-mm-traspaso-traslado-material#traslado-de-almacen-a-almacen-en-un-paso)
 11. [Transacciones](/blog/sap-mm-traspaso-traslado-material#transacciones)
+12. [Referencias](/blog/sap-mm-traspaso-traslado-material#referencias)
 
 ## Libre utilización a control de calidad
 
@@ -71,7 +72,7 @@ Ingresar el código correspondiente en el campo `Motivo de movimiento / Reason f
 
 Clase de movimiento `309`
 
-> Ambos materiales deben tener la misma unidad de almacenamiento.
+Es posible que se requiera un traspaso de material a material cuando, debido a atributos físicos, químicos u otros, el material **"A"** necesita cambiarse al material **"B"**. Ambos materiales deben tener la misma unidad de almacenamiento.
 
 Ingresar el código correspondiente en el campo `Motivo de movimiento / Reason for Movement`, ejemplo: **0001**.
 
@@ -106,3 +107,7 @@ Clase de movimiento `311`
 ## Transacciones
 
 - `MIGO` Movimiento de mercancías
+
+## Referencias
+
+- [Materials Management with SAP S/4HANA](https://www.sap-press.com/materials-management-with-sap-s4hana_5835/)
