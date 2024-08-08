@@ -1,0 +1,90 @@
+---
+title: SAP MM Inventario físico
+publishDate: "2024-08-08T00:00:00"
+author: José Aular
+tag: sap
+---
+
+import CustomLink from "~/components/CustomLink.astro";
+import CustomImage from "~/components/CustomImage.astro";
+
+export const components = {
+  a: CustomLink,
+  img: CustomImage,
+};
+
+## Tabla de contenido
+
+1.  [Crear documento para inventario](/blog/sap-mm-inventario-fisico#crear-documento-para-inventario)
+2.  [Imprimir documento para inventario](/blog/sap-mm-inventario-fisico#imprimir-documento-para-inventario)
+3.  [Registrar recuento de inventario](/blog/sap-mm-inventario-fisico#registrar-recuento-de-inventario)
+4.  [Nuevo recuento de inventario (Opcional)](/blog/sap-mm-inventario-fisico#nuevo-recuento-de-inventario-opcional)
+5.  [Listado de diferencias](/blog/sap-mm-inventario-fisico#listado-de-diferencias)
+6.  [Contabilizar diferencias](/blog/sap-mm-inventario-fisico#contabilizar-diferencias)
+7.  [Transacciones](/blog/sap-mm-inventario-fisico#transacciones)
+8.  [Referencias](/blog/sap-mm-inventario-fisico#referencias)
+
+## Crear documento para inventario
+
+Código de transacción `MI01`
+
+El bloqueo de contabilización especifica que durante el recuento de inventario no se podrán contabilizar movimientos de mercancías para los stocks de un material contenidos en el documento para inventario. Para eliminar discrepancias durante el recuento de inventario físico, debe activar el indicador `Bloqueo contabil. / Posting Block`. El bloqueo de contabilización se elimina automáticamente cuando se registran los resultados del recuento del inventario físico.
+
+El indicador `Fijar stock teórico / Freeze book inventory` origina que el stock teórico actual se conserve en el documento para inventario. El sistema compara el stock contado con el stock teórico fijado para comprobar si existen diferencias de inventario.
+
+![MI01 Acceso](https://res.cloudinary.com/jaular/image/upload/v1723129698/blog/sap-mm-inventario-fisico/mi01-1_kjl4zr.png "MI01 Acceso")
+
+### Tratamiento colectivo
+
+![MI01 Tratamiento colectivo](https://res.cloudinary.com/jaular/image/upload/v1723129699/blog/sap-mm-inventario-fisico/mi01-2_ouvtzr.png "MI01 Tratamiento colectivo")
+
+## Imprimir documento para inventario
+
+Código de transacción `MI21`
+
+![MI21 Imprimir documento inventario](https://res.cloudinary.com/jaular/image/upload/v1723132395/blog/sap-mm-inventario-fisico/mi21-1_gt1whi.png "MI21 Imprimir documento inventario")
+
+![MI21 Vista de impresión para LP01](https://res.cloudinary.com/jaular/image/upload/v1723132396/blog/sap-mm-inventario-fisico/mi21-2_ke9iny.png "MI21 Vista de impresión para LP01")
+
+## Registrar recuento de inventario
+
+Código de transacción `MI04`
+
+![MI04 Acceso](https://res.cloudinary.com/jaular/image/upload/v1723137749/blog/sap-mm-inventario-fisico/mi04-1_jcvqem.png "MI04 Acceso")
+
+### Tratamiento colectivo
+
+![MI04 Tratamiento colectivo](https://res.cloudinary.com/jaular/image/upload/v1723137749/blog/sap-mm-inventario-fisico/mi04-2_f9n9e4.png "MI04 Tratamiento colectivo")
+
+## Nuevo recuento de inventario (Opcional)
+
+Código de transacción `MI11`
+
+Si la gerencia no acepta la discrepancia, o si la discrepancia supera cierta tolerancia, entonces esos materiales deben volver a contarse. Un recuento permite a los usuarios volver a contar el material en la ubicación en el documento de inventario físico.
+
+## Listado de diferencias
+
+Código de transacción `MI20`
+
+![MI20 Listado diferencias inventario](https://res.cloudinary.com/jaular/image/upload/v1723138212/blog/sap-mm-inventario-fisico/mi20-1_vxkgpv.png "MI20 Listado diferencias inventario")
+
+## Contabilizar diferencias
+
+Código de transacción `MI07`
+
+Para cada material en el documento de recuento, se debe ingresar la diferencia y un código de motivo para mostrar claramente por qué el recuento no se corresponde con la cantidad del libro.
+
+![MI07 Contabilizar diferencias](https://res.cloudinary.com/jaular/image/upload/v1723138670/blog/sap-mm-inventario-fisico/mi07-1_teqlvx.png "MI07 Contabilizar diferencias")
+
+## Transacciones
+
+- `MI01 /02-03` Documento para inventario
+- `MI21` Imprimir documento para inventario
+- `MI04 /05-06` Recuento de inventario
+- `MI11` Nuevo recuento de inventario (Opcional)
+- `MI20` Listado de diferencias
+- `MI07` Contabilizar diferencias
+
+## Referencias
+
+- [Materials Management with SAP S/4HANA](https://www.sap-press.com/materials-management-with-sap-s4hana_5835/)
