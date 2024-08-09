@@ -21,8 +21,10 @@ export const components = {
 2.  [Puesto de trabajo](/blog/sap-pm-objectos-tecnicos#puesto-de-trabajo)
 3.  [Ubicación técnica](/blog/sap-pm-objectos-tecnicos#ubicación-técnica)
 4.  [Equipo](/blog/sap-pm-objectos-tecnicos#equipo)
-5.  [Transacciones](/blog/sap-pm-objectos-tecnicos#transacciones)
-6.  [Referencias](/blog/sap-pm-objectos-tecnicos#referencias)
+5.  [Lista de materiales](/blog/sap-pm-objectos-tecnicos#lista-de-materiales)
+6.  [Punto de medida y contador](/blog/sap-pm-objectos-tecnicos#punto-de-medida-y-contador)
+7.  [Transacciones](/blog/sap-pm-objectos-tecnicos#transacciones)
+8.  [Referencias](/blog/sap-pm-objectos-tecnicos#referencias)
 
 ## Clase y Características
 
@@ -156,6 +158,8 @@ Puede utilizar el campo `Posición / Position` para organizar las ubicaciones t�
 
 ### Representación de estructura para ubicación tecnica (Opcional)
 
+Código de transacción `IH01`
+
 ![IH01 Lista de estructura](https://res.cloudinary.com/jaular/image/upload/v1722453528/blog/sap-pm-objectos-tecnicos/ih01-1_lk1b4z.png "IH01 Lista de estructura")
 
 ## Equipo
@@ -234,6 +238,111 @@ Estas son algunas diferencias entre las ubicaciones técnicas y los equipos:
 - El equipo tiene una asignación de número interno y externo, mientras que el número de una ubicación técnica sólo se asigna externamente.
 - Se puede modificar el número de una ubicación técnica, mientras que el número de un equipo siempre está asignado de forma permanente.
 
+## Lista de materiales
+
+Una lista de materiales `Bills of Materials (BOM)` es una lista completa y formalmente estructurada de todos los componentes que pertenecen a un producto o conjunto. Las listas de materiales contienen los números de material de los componentes individuales, así como sus cantidades y unidades de medida. Los componentes pueden ser piezas o conjuntos que pueden o no mantenerse almacenados.
+
+Puede utilizar una lista de materiales para describir la estructura de un material u objeto técnico y luego utilícelo para identificar la ubicación del daño o la ubicación donde se debe realizar el mantenimiento para un objeto técnico.
+
+### Crear lista de materiales para equipo
+
+Código de transacción `IB01`
+
+#### Imagen inicial
+
+![IB01 Imagen inicial](https://res.cloudinary.com/jaular/image/upload/v1722611353/blog/sap-pm-objectos-tecnicos/ib01-1_chopyx.png "IB01 Imagen inicial")
+
+#### Resumen de cabeceras
+
+![IB01 Resumen de cabeceras](https://res.cloudinary.com/jaular/image/upload/v1722611353/blog/sap-pm-objectos-tecnicos/ib01-2_mattfl.png "IB01 Resumen de cabeceras")
+
+#### Resumen de posiciones general
+
+Los `Tipo de posición / Item category` son un conjunto predefinido de reglas que rigen cómo se comporta un componente específico dentro de una lista de materiales. Los tipos de posición estándar comúnmente utilizados son:
+
+- **Posición de almacén (L)**:
+  Este tipo de posición se aplica a los componentes que se mantienen en stock. Cualquier componente ingresado con esta categoría en la lista de materiales debe tener un registro maestro válido en el sistema. Cuando utiliza esta categoría de artículo, los componentes de artículos en stock se reservan automáticamente para la orden de mantenimiento.
+
+- **Posición no de almacén (N)**:
+  Los artículos que no están en stock se pueden ingresar en la lista de materiales con o sin un registro maestro. Para ingresar un artículo que no está en stock sin un registro maestro, simplemente debe ingresar un texto descriptivo. Cuando utiliza este tipo de posición, el sistema crea automáticamente una solicitud de pedido para estos componentes.
+
+- **Elem.estructura MT (I)**:
+  Este tipo de posición está destinada a componentes que sólo se utilizan para estructurar un objeto técnico (conjunto PM).
+
+![IB01 Resumen de posiciones general](https://res.cloudinary.com/jaular/image/upload/v1722611353/blog/sap-pm-objectos-tecnicos/ib01-3_boqsbj.png "IB01 Resumen de posiciones general")
+
+### Crear lista de materiales para material
+
+Código de transacción `CS01`
+
+#### Imagen inicial
+
+Los materiales **IBAU** son un tipo de material que físicamente no existe, sino que es un conjunto de materiales que representa la estructura jerárquica del objeto.
+
+![CS01 Imagen inicial](https://res.cloudinary.com/jaular/image/upload/v1722710547/blog/sap-pm-objectos-tecnicos/cs01-1_uihuoe.png "CS01 Imagen inicial")
+
+#### Resumen de cabeceras
+
+![CS01 Resumen de cabeceras](https://res.cloudinary.com/jaular/image/upload/v1722710547/blog/sap-pm-objectos-tecnicos/cs01-2_fr7nsq.png "CS01 Resumen de cabeceras")
+
+#### Resumen de posiciones general
+
+Dado que los componentes de matenimiento (**IBAU**) no son específicos de la planta, debe agregar el **IBAU** a la lista de materiales como **Elem.estructura MT** (**I**) en el campo `Tipo de posición / Item category`.
+
+![CS01 Resumen de posiciones general](https://res.cloudinary.com/jaular/image/upload/v1722710547/blog/sap-pm-objectos-tecnicos/cs01-3_whrgh9.png "CS01 Resumen de posiciones general")
+
+#### Asignar material IBAU a equipo
+
+En el campo `Tipo de montaje / ConstType` ingrese un número de material con el que se agrupan todos los objetos similares. La lista de materiales (**BOM**) del material se asigna indirectamente al objeto. Esta es una buena idea cuando una empresa tiene varios objetos técnicos idénticos agrupados bajo un número de material.
+
+![IE02 Asignar material IBAU a equipo](https://res.cloudinary.com/jaular/image/upload/v1722611883/blog/sap-pm-objectos-tecnicos/cs01_ie02-1_q4bbba.png "IE02 Asignar material IBAU a equipo")
+
+### Representación de estructura para ubicación tecnica con lista de materiales (Opcional)
+
+![IH01 Lista de estructura con lista de materiales](https://res.cloudinary.com/jaular/image/upload/v1722612493/blog/sap-pm-objectos-tecnicos/ih01-2_syh4wi.png "IH01 Lista de estructura con lista de materiales")
+
+## Punto de medida y contador
+
+Los puntos de medida `Measuring points` marcan aquellos lugares en los que se describe el estado actual de un sistema técnico, por ejemplo, temperatura, presión de velocidad de rotación, nivel de contaminación, viscosidad, etc.
+
+Los contadores `Counters` marcan aquellas ubicaciones donde se puede representar el desgaste de un objeto, el consumo o la reducción de un suministro de trabajo, por ejemplo, un contador de kilómetros, un contador de horas de funcionamiento, el número de piezas, una cantidad producida en toneladas, etc.
+
+### Crear punto de medida (contador)
+
+Código de transacción `IK01`
+
+![IK01 Acceso](https://res.cloudinary.com/jaular/image/upload/v1723212750/blog/sap-pm-objectos-tecnicos/ik01-1_qhqerw.png "IK01 Acceso")
+
+#### Datos generales
+
+Ingresa una [característica](/blog/sap-pm-objectos-tecnicos#clase-y-características) en el campo `Característic / Characteristic`.
+
+El campo `ContadorMarcDes / CntrOverReadg` es el primer valor que un contador no puede mostrar. Por ejemplo, en el caso de un contador de cinco dígitos, este valor sería 100.000.
+
+El sistema utiliza el campo `Actividad anual / Annual Estimate` para pronosticar la próxima fecha de mantenimiento en función de la lectura actual del contador.
+
+En el indicador `Contar retrocede / Count backwards` se define que el contador corre hacia atrás.
+
+![IK01 Datos generales](https://res.cloudinary.com/jaular/image/upload/v1723212296/blog/sap-pm-objectos-tecnicos/ik01-2_epunjj.png "IK01 Datos generales")
+
+### Crear documento de medición
+
+Código de transacción `IK11`
+
+![IK11 Acceso](https://res.cloudinary.com/jaular/image/upload/v1723213133/blog/sap-pm-objectos-tecnicos/ik11-1_oicwpb.png "IK11 Acceso")
+
+#### Datos generales
+
+![IK11 Datos generales](https://res.cloudinary.com/jaular/image/upload/v1723218448/blog/sap-pm-objectos-tecnicos/ik11-2_tfc5ca.png "IK11 Datos generales")
+
+### Anular documento de medición
+
+Código de transacción `IK12`
+
+Acceso: `Documentos de medición / Measurement Document` -> `Funciones / Functions` -> `Anulación / Reversal Indicator` -> `Fijar / Set`
+
+![IK12  Anular documento de medición](https://res.cloudinary.com/jaular/image/upload/v1723218518/blog/sap-pm-objectos-tecnicos/ik12-1_spnc1s.png "IK12  Anular documento de medición")
+
 ## Transacciones
 
 - `CT04` Gestión de características
@@ -244,10 +353,17 @@ Estas son algunas diferencias entre las ubicaciones técnicas y los equipos:
 - `IL07` Lista ubicaciones técnicas (Opcional)
 - `IE01 /02-03` Equipo
 - `IE4N` Equipo - Desmontaje/Montaje con movimiento de mercancías (Opcional)
+- `IB01 /02-03` Lista de materiales para equipo
+- `IB11 /12-13` Lista de materiales para ubicación técnica
+- `CS01 /02-03` Lista de materiales para material
+- `IK01 /02-03` Punto de medida
+- `IK11 /12-13` Documentos de medición
+- `IK17` Visualizar documentos de medición (Opcional)
 
 ## Referencias
 
 - [Plant Maintenance with SAP S/4HANA](https://www.sap-press.com/plant-maintenance-with-sap-s4hana-business-user-guide_5180/)
 - [ERProof](https://erproof.com/)
-- [SAP Help Portal](https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/e98c7c41bbe8439e90daa5c114a7573b/59bdb853dcfcb44ce10000000a174cb4.html)
+- [SAP Help Portal](https://help.sap.com/docs/SAP_ERP/61f8c51bfee94fa78c8835db685249eb/3582c253d0a4b54ce10000000a174cb4.html?locale=en-US&version=6.18.latest)
 - [SAP Mobile Plant Maintenance | Incentro](https://sap-plant-maintenance.com/)
+- [VaibhavERP](https://vaibhaverp.com/)
