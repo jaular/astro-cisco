@@ -1,0 +1,83 @@
+---
+title: SAP MM Proceso de consignación
+publishDate: "2024-08-14T00:00:00"
+author: José Aular
+tag: sap
+---
+
+import CustomLink from "~/components/CustomLink.astro";
+import CustomImage from "~/components/CustomImage.astro";
+
+export const components = {
+  a: CustomLink,
+  img: CustomImage,
+};
+
+## Tabla de contenido
+
+1.  [Consignación](/blog/sap-mm-proceso-consignacion#consignación)
+2.  [Crear pedido de compras con consignación](/blog/sap-mm-proceso-consignacion#crear-pedido-de-compras-con-consignación)
+3.  [Entrada de mercancía](/blog/sap-mm-proceso-consignacion#entrada-de-mercancía)
+4.  [Salida de mercancía (centro de coste)](/blog/sap-mm-proceso-consignacion#salida-de-mercancía-centro-de-coste)
+5.  [Liquidación de consignación](/blog/sap-mm-proceso-consignacion#liquidación-de-consignación)
+6.  [Mensajes de verificación de facturas](/blog/sap-mm-proceso-consignacion#mensajes-de-verificación-de-facturas)
+7.  [Transacciones](/blog/sap-mm-proceso-consignacion#transacciones)
+8.  [Referencias](/blog/sap-mm-proceso-consignacion#referencias)
+
+## Consignación
+
+La consignación `Consignment` se utiliza cuando un proveedor proporciona materiales a su empresa en préstamo. Los materiales se guardan en el almacén de su empresa hasta que usted los retire para su procesamiento.
+
+Se necesita un [registro de info de compras](/blog/sap-mm-registro-info-compras) entre el material y el proveedor para reflejar la fuente de suministro. Al crear un registro info, asegúrese de elegir la opción **Consignación** en la pantalla inicial.
+
+## Crear pedido de compras con consignación
+
+Código de transacción `ME21N`
+
+![ME21N Pedido de compras](https://res.cloudinary.com/jaular/image/upload/v1723562709/blog/sap-mm-proceso-consignacion/me21n_o3zfk9.png "ME21N Pedido de compras")
+
+## Entrada de mercancía
+
+Código de transacción `MIGO` / Clase de movimiento `101`
+
+![MIGO Entrada de mercancía](https://res.cloudinary.com/jaular/image/upload/v1723562708/blog/sap-mm-proceso-consignacion/migo-101_elrxhj.png "MIGO Entrada de mercancía")
+
+## Traspaso consignación a propio
+
+Código de transacción `MIGO` / Clase de movimiento `411 K`
+
+![MIGO Traspaso consignación a propio](https://res.cloudinary.com/jaular/image/upload/v1723562709/blog/sap-mm-proceso-consignacion/migo-411k_kmsdmh.png "MIGO Traspaso consignación a propio")
+
+## Salida de mercancía (centro de coste)
+
+Código de transacción `MIGO` / Clase de movimiento `201` - `201 K`
+
+![MIGO Salida de mercancía](https://res.cloudinary.com/jaular/image/upload/v1723564213/blog/sap-mm-proceso-consignacion/migo-201_ksphku.png "MIGO Salida de mercancía")
+
+## Liquidación de consignación
+
+Código de transacción `MRKO`
+
+![MRKO Liquidación de consignación 1](https://res.cloudinary.com/jaular/image/upload/v1723570142/blog/sap-mm-proceso-consignacion/mrko-1_frmo3i.png "MRKO Liquidación de consignación 1")
+
+![MRKO Liquidación de consignación 2](https://res.cloudinary.com/jaular/image/upload/v1723570144/blog/sap-mm-proceso-consignacion/mrko-2_bo300f.png "MRKO Liquidación de consignación 2")
+
+## Mensajes de verificación de facturas
+
+Código de transacción `MR91`
+
+![MR91 Mensajes de verificación de facturas](https://res.cloudinary.com/jaular/image/upload/v1723570560/blog/sap-mm-proceso-consignacion/mr91_mqhahu.png "MR91 Mensajes de verificación de facturas")
+
+## Transacciones
+
+- `ME11 /12-13` Registro info
+- `ME21N /22N-23N` Pedido
+- `ME29N` Liberar pedido
+- `MIGO` Movimiento de mercancías
+- `MRKO` Liquidación de consignación
+- `MR91` Mensajes de verificación de facturas
+
+## Referencias
+
+- [Materials Management with SAP S/4HANA](https://www.sap-press.com/materials-management-with-sap-s4hana_5835/)
+- [ERProof](https://erproof.com/)
