@@ -1,0 +1,111 @@
+---
+title: SAP MM Proceso de subcontratación
+publishDate: "2024-08-17T00:00:00"
+author: José Aular
+tag: sap
+---
+
+import CustomLink from "~/components/CustomLink.astro";
+import CustomImage from "~/components/CustomImage.astro";
+
+export const components = {
+  a: CustomLink,
+  img: CustomImage,
+};
+
+## Tabla de contenido
+
+1.  [Subcontratación](/blog/sap-mm-proceso-subcontratacion#subcontratación)
+2.  [Entrada de mercancías sin pedido (Opcional)](/blog/sap-mm-proceso-subcontratacion#entrada-de-mercancías-sin-pedido-opcional)
+3.  [Crear lista de materiales para material](/blog/sap-mm-proceso-subcontratacion#crear-lista-de-materiales-para-material)
+4.  [Crear versión de fabricación](/blog/sap-mm-proceso-subcontratacion#crear-versión-de-fabricación)
+5.  [Crear pedido de compras con subcontratación](/blog/sap-mm-proceso-subcontratacion#crear-pedido-de-compras-con-subcontratación)
+6.  [Supervisión de stock de subcontratación para proveedor](/blog/sap-mm-proceso-subcontratacion#supervisión-de-stock-de-subcontratación-para-proveedor)
+7.  [Entrada de mercancías](/blog/sap-mm-proceso-subcontratacion#entrada-de-mercancías)
+8.  [Transacciones](/blog/sap-mm-proceso-subcontratacion#transacciones)
+9.  [Referencias](/blog/sap-mm-proceso-subcontratacion#referencias)
+
+## Subcontratación
+
+la subcontratación `Subcontracting` comienza cuando su empresa entrega componentes a un subcontratista, que generalmente es un proveedor, ya sea para ensamblar o agregar valor al producto. Su empresa sacaría el inventario de componentes de sus libros y los componentes se reflejarían en el inventario del proveedor. Cuando el proveedor ha hecho lo que se le contrató, su empresa recibe los bienes.
+
+Es necesario crear una lista de materiales `Bills of Materials (BOM)` para material antes de realizar cualquier pedido de subcontratación.
+
+## Entrada de mercancías sin pedido (Opcional)
+
+Código de transacción `MIGO` / Clase de movimiento `501`
+
+![MIGO Entrada de mercancías sin pedido](https://res.cloudinary.com/jaular/image/upload/v1723905737/blog/sap-mm-proceso-subcontratacion/migo-501_r3ujnc.png "MIGO Entrada de mercancías sin pedido")
+
+## Crear lista de materiales para material
+
+Código de transacción `CS01`
+
+![CS01 Imagen inicial](https://res.cloudinary.com/jaular/image/upload/v1723905980/blog/sap-mm-proceso-subcontratacion/cs01-1_gw89zh.png "CS01 Imagen inicial")
+
+### Resumen de cabeceras
+
+![CS01 Resumen de cabeceras](https://res.cloudinary.com/jaular/image/upload/v1723905981/blog/sap-mm-proceso-subcontratacion/cs01-2_vxlbwr.png "CS01 Resumen de cabeceras")
+
+### Resumen de posiciones general
+
+Los `Tipo de posición / Item category` son un conjunto predefinido de reglas que rigen cómo se comporta un componente específico dentro de una lista de materiales. Los tipos de posición estándar comúnmente utilizados son:
+
+- **Posición de almacén (L)**:
+  Este tipo de posición se aplica a los componentes que se mantienen en stock. Cualquier componente ingresado con esta categoría en la lista de materiales debe tener un registro maestro válido en el sistema. Cuando utiliza esta categoría de artículo, los componentes de artículos en stock se reservan automáticamente para la orden de mantenimiento.
+
+- **Posición no de almacén (N)**:
+  Los artículos que no están en stock se pueden ingresar en la lista de materiales con o sin un registro maestro. Para ingresar un artículo que no está en stock sin un registro maestro, simplemente debe ingresar un texto descriptivo. Cuando utiliza este tipo de posición, el sistema crea automáticamente una solicitud de pedido para estos componentes.
+
+- **Elem.estructura MT (I)**:
+  Este tipo de posición está destinada a componentes que sólo se utilizan para estructurar un objeto técnico (conjunto PM).
+
+![CS01 Resumen de posiciones general](https://res.cloudinary.com/jaular/image/upload/v1723905981/blog/sap-mm-proceso-subcontratacion/cs01-3_ao2rht.png "CS01 Resumen de posiciones general")
+
+## Crear versión de fabricación
+
+Código de transacción `C223`
+
+![C223 Actualización en masa](https://res.cloudinary.com/jaular/image/upload/v1723906464/blog/sap-mm-proceso-subcontratacion/c223-1_ezggop.png "C223 Actualización en masa")
+
+![C223 Actualización detallada](https://res.cloudinary.com/jaular/image/upload/v1723906465/blog/sap-mm-proceso-subcontratacion/c223-2_hssrtn.png "C223 Actualización detallada")
+
+![C223 Verificación correcta](https://res.cloudinary.com/jaular/image/upload/v1723906465/blog/sap-mm-proceso-subcontratacion/c223-3_fq9npb.png "C223 Verificación correcta")
+
+## Crear pedido de compras con subcontratación
+
+Código de transacción `ME21N`
+
+![ME21N Pedido de compras](https://res.cloudinary.com/jaular/image/upload/v1723909066/blog/sap-mm-proceso-subcontratacion/me21n-1_l0tqmw.png "ME21N Pedido de compras")
+
+## Supervisión de stock de subcontratación para proveedor
+
+Código de transacción `ME2O`
+
+![ME2O Supervisión de stock de subcontratación para proveedor - 1](https://res.cloudinary.com/jaular/image/upload/v1723908438/blog/sap-mm-proceso-subcontratacion/me2o-1_fpi9mb.png "ME2O Supervisión de stock de subcontratación para proveedor - 1")
+
+![ME2O Supervisión de stock de subcontratación para proveedor - 2](https://res.cloudinary.com/jaular/image/upload/v1723908440/blog/sap-mm-proceso-subcontratacion/me2o-2_iem1go.png "ME2O Supervisión de stock de subcontratación para proveedor - 2")
+
+![ME2O Supervisión de stock de subcontratación para proveedor - 3](https://res.cloudinary.com/jaular/image/upload/v1723908438/blog/sap-mm-proceso-subcontratacion/me2o-3_wf2gw2.png "ME2O Supervisión de stock de subcontratación para proveedor - 3")
+
+![ME2O Supervisión de stock de subcontratación para proveedor - 4](https://res.cloudinary.com/jaular/image/upload/v1723908439/blog/sap-mm-proceso-subcontratacion/me2o-4_hd4vm0.png "ME2O Supervisión de stock de subcontratación para proveedor - 4")
+
+## Entrada de mercancías
+
+Código de transacción `MIGO`
+
+![MIGO Entrada de mercancías](https://res.cloudinary.com/jaular/image/upload/v1723908843/blog/sap-mm-proceso-subcontratacion/migo-101_tenwmt.png "MIGO Entrada de mercancías")
+
+## Transacciones
+
+- `MIGO` Movimiento de mercancías
+- `CS01 /02-03` Lista de materiales para material
+- `C223` Versión de fabricación
+- `ME21N /22N-23N` Pedido de compras
+- `ME29N` Liberar pedido de compras
+- `ME2O` Supervisión de stock de subcontratación para proveedor
+
+## Referencias
+
+- [Materials Management with SAP S/4HANA](https://www.sap-press.com/materials-management-with-sap-s4hana_5835/)
+- [ERProof](https://erproof.com/)
