@@ -1,15 +1,17 @@
 ---
 import { Image } from "astro:assets";
 import { getPlaiceholder } from "plaiceholder";
+import { cn } from "~/lib/utils";
 
 type Props = {
   src: string;
   title: string;
   alt: string;
   loading?: boolean;
+  shadow?: boolean;
 };
 
-const { src, title, alt, loading } = Astro.props;
+const { src, title, alt, loading, shadow = true } = Astro.props;
 const loadingAttribute = loading ? "eager" : "lazy";
 
 const getRemoteImageWithPlaiceholder = async (src: string) => {
@@ -32,7 +34,12 @@ const [Svg, svgProps, svgChildren] = svg;
 //  https://github.com/joe-bell/plaiceholder/blob/main/examples/astro/src/pages/svg/single.astro
 ---
 
-<div class="aspect-video rounded relative block overflow-hidden">
+<div
+  class={cn(
+    shadow ? "shadow-md" : "",
+    "aspect-video rounded relative block overflow-hidden"
+  )}
+>
   <Svg
     {...svgProps}
     style={{ ...svgProps.style }}
