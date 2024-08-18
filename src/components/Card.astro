@@ -18,12 +18,10 @@ const loading = index < 1 ? true : false;
   target="_blank"
   rel="noopener noreferrer"
 >
+  <p class="text-base font-medium text-black dark:text-white pb-2.5">
+    {title}
+  </p>
   <div class="group-hover:opacity-75">
     <CustomImage src={imageSrc} alt={title} title={title} loading={loading} />
-  </div>
-  <div class="pt-2">
-    <p class="text-base text-black dark:text-white">
-      {title}
-    </p>
   </div>
 </a>
