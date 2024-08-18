@@ -16,7 +16,7 @@ import Card from "~/components/Card.astro";
     </div>
     {
       projects.length > 0 && (
-        <div class="grid gap-10">
+        <div class="grid gap-10 sm:grid-cols-2">
           {projects.map((project, index) => (
             <Card
               index={index}
