@@ -1,0 +1,80 @@
+---
+title: SAP MM Contratación de servicios
+publishDate: "2024-08-20T00:00:00"
+author: José Aular
+tag: sap
+---
+
+import CustomLink from "~/components/CustomLink.astro";
+import CustomImage from "~/components/CustomImage.astro";
+
+export const components = {
+  a: CustomLink,
+  img: CustomImage,
+};
+
+## Tabla de contenido
+
+1.  [Contratación de servicios](/blog/sap-mm-contratacion-servicios#contratación-de-servicios)
+2.  [Añadir registro maestro de servicios](/blog/sap-mm-contratacion-servicios#añadir-registro-maestro-de-servicios)
+3.  [Crear solicitud de pedido de servicios](/blog/sap-mm-contratacion-servicios#crear-solicitud-de-pedido-de-servicios)
+4.  [Crear pedido de servicios](/blog/sap-mm-contratacion-servicios#crear-pedido-de-servicios)
+5.  [Hoja de entrada de servicio](/blog/sap-mm-contratacion-servicios#hoja-de-entrada-de-servicio)
+6.  [Añadir factura recibida](/blog/sap-mm-contratacion-servicios#añadir-factura-recibida)
+7.  [Transacciones](/blog/sap-mm-contratacion-servicios#transacciones)
+8.  [Referencias](/blog/sap-mm-contratacion-servicios#referencias)
+
+## Contratación de servicios
+
+Es la actividad de contratar (y gestionar) proveedores que prestan servicios basados en personas a una empresa: empresas de consultoría técnica, agencias de servicios especializados o empresas de mantenimiento, por ejemplo.
+
+## Añadir registro maestro de servicios
+
+Código de transacción `AC03`
+
+Un registro maestro de servicios es un documento que contiene la información básica sobre un servicio, similar a un registro maestro de materiales.
+
+![AC03 Añadir registro maestro de servicios](https://res.cloudinary.com/jaular/image/upload/v1724164597/blog/sap-mm-contratacion-servicios/ac03-1_vcjq8p.png "AC03 Añadir registro maestro de servicios")
+
+## Crear solicitud de pedido de servicios
+
+Código de transacción `ME51N`
+
+El `Tipo de imputación (I)  / Account Assignment Category (A)` debe mantenerse como `Centro de coste (K) / Cost center (K)` y el `Tipo de posición (P) / Item category (I)` debe establecerse como `Servicios (F) / Service (D)`.
+
+![ME51N Crear solicitud de pedido](https://res.cloudinary.com/jaular/image/upload/v1724078728/blog/sap-mm-contratacion-servicios/me51n-1_bvygyd.png "ME51N Crear solicitud de pedido")
+
+## Crear pedido de servicios
+
+Código de transacción `ME21N`
+
+![ME21N Crear pedido](https://res.cloudinary.com/jaular/image/upload/v1724079057/blog/sap-mm-contratacion-servicios/me21n-1_p0k69n.png "ME21N Crear pedido")
+
+## Hoja de entrada de servicio
+
+Código de transacción `ML81N`
+
+![ML81N Hoja de entrada de servicio](https://res.cloudinary.com/jaular/image/upload/v1724079217/blog/sap-mm-contratacion-servicios/ml81n-1_jnm5hi.png "ML81N Hoja de entrada de servicio")
+
+## Añadir factura recibida
+
+Código de transacción `MIRO`
+
+![MIRO Añadir factura recibida](https://res.cloudinary.com/jaular/image/upload/v1724079369/blog/sap-mm-contratacion-servicios/miro-1_lxre28.png "MIRO Añadir factura recibida")
+
+![MIRO Simular documento](https://res.cloudinary.com/jaular/image/upload/v1724079370/blog/sap-mm-contratacion-servicios/miro-2_gsvbyb.png "MIRO Simular documento")
+
+## Transacciones
+
+- `AC03` Registro maestro de servicios
+- `ME51N /52N-53N` Solicitud de pedido
+- `ME54N` Liberar solicitud de pedido
+- `ME21N /22N-23N` Pedido
+- `ME29N` Liberar pedido
+- `ML81N` Hoja de entrada de servicio
+- `MIRO` Añadir factura recibida
+
+## Referencias
+
+- [Materials Management with SAP S/4HANA](https://www.sap-press.com/materials-management-with-sap-s4hana_5835/)
+- [ERProof](https://erproof.com/)
