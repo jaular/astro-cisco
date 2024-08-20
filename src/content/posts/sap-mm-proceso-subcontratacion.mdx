@@ -19,7 +19,7 @@ export const components = {
 2.  [Entrada de mercancías sin pedido (Opcional)](/blog/sap-mm-proceso-subcontratacion#entrada-de-mercancías-sin-pedido-opcional)
 3.  [Crear lista de materiales para material](/blog/sap-mm-proceso-subcontratacion#crear-lista-de-materiales-para-material)
 4.  [Crear versión de fabricación](/blog/sap-mm-proceso-subcontratacion#crear-versión-de-fabricación)
-5.  [Crear pedido de compras con subcontratación](/blog/sap-mm-proceso-subcontratacion#crear-pedido-de-compras-con-subcontratación)
+5.  [Crear pedido de subcontratación](/blog/sap-mm-proceso-subcontratacion#crear-pedido-de-subcontratación)
 6.  [Supervisión de stock de subcontratación para proveedor](/blog/sap-mm-proceso-subcontratacion#supervisión-de-stock-de-subcontratación-para-proveedor)
 7.  [Entrada de mercancías](/blog/sap-mm-proceso-subcontratacion#entrada-de-mercancías)
 8.  [Transacciones](/blog/sap-mm-proceso-subcontratacion#transacciones)
@@ -72,11 +72,13 @@ Código de transacción `C223`
 
 ![C223 Verificación correcta](https://res.cloudinary.com/jaular/image/upload/v1723906465/blog/sap-mm-proceso-subcontratacion/c223-3_fq9npb.png "C223 Verificación correcta")
 
-## Crear pedido de compras con subcontratación
+## Crear pedido de subcontratación
 
 Código de transacción `ME21N`
 
-![ME21N Pedido de compras](https://res.cloudinary.com/jaular/image/upload/v1723909066/blog/sap-mm-proceso-subcontratacion/me21n-1_l0tqmw.png "ME21N Pedido de compras")
+El `Tipo de posición (P) / Item category (I)` debe establecerse como `Subcontratación (L) / Subcontracting (L)`.
+
+![ME21N Crear pedido](https://res.cloudinary.com/jaular/image/upload/v1723909066/blog/sap-mm-proceso-subcontratacion/me21n-1_l0tqmw.png "ME21N Crear pedido")
 
 ## Supervisión de stock de subcontratación para proveedor
 
@@ -101,8 +103,8 @@ Código de transacción `MIGO`
 - `MIGO` Movimiento de mercancías
 - `CS01 /02-03` Lista de materiales para material
 - `C223` Versión de fabricación
-- `ME21N /22N-23N` Pedido de compras
-- `ME29N` Liberar pedido de compras
+- `ME21N /22N-23N` Pedido
+- `ME29N` Liberar pedido
 - `ME2O` Supervisión de stock de subcontratación para proveedor
 
 ## Referencias

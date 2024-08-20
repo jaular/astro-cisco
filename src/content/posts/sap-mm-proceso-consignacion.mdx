@@ -16,7 +16,7 @@ export const components = {
 ## Tabla de contenido
 
 1.  [Consignación](/blog/sap-mm-proceso-consignacion#consignación)
-2.  [Crear pedido de compras con consignación](/blog/sap-mm-proceso-consignacion#crear-pedido-de-compras-con-consignación)
+2.  [Crear pedido de consignación](/blog/sap-mm-proceso-consignacion#crear-pedido-de-consignación)
 3.  [Entrada de mercancía](/blog/sap-mm-proceso-consignacion#entrada-de-mercancía)
 4.  [Salida de mercancía (centro de coste)](/blog/sap-mm-proceso-consignacion#salida-de-mercancía-centro-de-coste)
 5.  [Liquidación de consignación](/blog/sap-mm-proceso-consignacion#liquidación-de-consignación)
@@ -30,11 +30,13 @@ La consignación `Consignment` se utiliza cuando un proveedor proporciona materi
 
 Se necesita un [registro de info de compras](/blog/sap-mm-registro-info-compras) entre el material y el proveedor para reflejar la fuente de suministro. Al crear un registro info, asegúrese de elegir la opción **Consignación** en la pantalla inicial.
 
-## Crear pedido de compras con consignación
+## Crear pedido de consignación
 
 Código de transacción `ME21N`
 
-![ME21N Pedido de compras](https://res.cloudinary.com/jaular/image/upload/v1723562709/blog/sap-mm-proceso-consignacion/me21n_o3zfk9.png "ME21N Pedido de compras")
+El `Tipo de posición (P) / Item category (I)` debe establecerse como `Consignación (C) / Consignment (K)`.
+
+![ME21N Crear pedido](https://res.cloudinary.com/jaular/image/upload/v1723562709/blog/sap-mm-proceso-consignacion/me21n_o3zfk9.png "ME21N Crear pedido")
 
 ## Entrada de mercancía
 
@@ -71,8 +73,8 @@ Código de transacción `MR91`
 ## Transacciones
 
 - `ME11 /12-13` Registro info de compras
-- `ME21N /22N-23N` Pedido de compras
-- `ME29N` Liberar pedido de compras
+- `ME21N /22N-23N` Pedido
+- `ME29N` Liberar pedido
 - `MIGO` Movimiento de mercancías
 - `MRKO` Liquidación de consignación
 - `MR91` Mensajes de verificación de facturas
