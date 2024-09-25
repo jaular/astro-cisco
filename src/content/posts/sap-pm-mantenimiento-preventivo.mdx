@@ -1,0 +1,329 @@
+---
+title: SAP PM Mantenimiento preventivo
+publishDate: "2024-09-25T00:00:00"
+author: José Aular
+tag: sap
+---
+
+import CustomLink from "~/components/CustomLink.astro";
+import CustomImage from "~/components/CustomImage.astro";
+import CustomTable from "~/components/CustomTable.astro";
+
+export const components = {
+  a: CustomLink,
+  img: CustomImage,
+  table: CustomTable,
+};
+
+## Tabla de contenido
+
+1.  [Estrategia](/blog/sap-pm-mantenimiento-preventivo#estrategia)
+2.  [Hoja de ruta](/blog/sap-pm-mantenimiento-preventivo#hoja-de-ruta)
+3.  [Plan ciclo individual](/blog/sap-pm-mantenimiento-preventivo#plan-ciclo-individual)
+4.  [Plan estrategia](/blog/sap-pm-mantenimiento-preventivo#plan-estrategia)
+5.  [Plan de mantenimiento múltiple](/blog/sap-pm-mantenimiento-preventivo#plan-de-mantenimiento-múltiple)
+6.  [Órdenes y notificaciones](/blog/sap-pm-mantenimiento-preventivo#órdenes-y-notificaciones)
+7.  [Transacciones](/blog/sap-pm-mantenimiento-preventivo#transacciones)
+8.  [Referencias](/blog/sap-pm-mantenimiento-preventivo#referencias)
+
+## Estrategia
+
+Una estrategia de mantenimiento `Maintenance Strategy` define las reglas para la secuencia de trabajo de mantenimiento planificado. Contiene información general de programación y, por lo tanto, se puede asignar a tantas [hojas de rutas de mantenimiento](/blog/sap-pm-mantenimiento-preventivo#hoja-de-ruta) y planes de mantenimiento como se requiera.
+
+Los ciclos y paquetes de mantenimiento contienen el momento o la condición de rendimiento en que se debe realizar el mantenimiento.
+
+### Crear estrategia de mantenimiento basado en rendimiento (Performance-Based Strategy)
+
+Código de transacción `IP11`
+
+![IP11 Resumen](https://res.cloudinary.com/jaular/image/upload/v1724540517/blog/sap-pm-mantenimiento-preventivo/ip11-1_ltkanw.png "IP11 Resumen")
+
+#### Detalle
+
+La `Jerarquía / Hierarchy` determina qué paquetes de mantenimiento se realizan si varios paquetes de mantenimiento deben realizarse al mismo tiempo. Si los paquetes de mantenimiento se deben ejecutar juntos, deben tener el mismo número de jerarquía.
+
+El sistema siempre selecciona los paquetes con el número de jerarquía más alto.
+
+![IP11 Detalle](https://res.cloudinary.com/jaular/image/upload/v1724540517/blog/sap-pm-mantenimiento-preventivo/ip11-2_dtjppx.png "IP11 Detalle")
+
+#### Secuencia de paquete
+
+![IP11 Secuencia de paquete](https://res.cloudinary.com/jaular/image/upload/v1724540517/blog/sap-pm-mantenimiento-preventivo/ip11-3_l2wvzy.png "IP11 Secuencia de paquete")
+
+### Crear estrategia de mantenimiento basado en tiempo (Time-Based Strategy)
+
+Código de transacción `IP11`
+
+![IP11 Resumen](https://res.cloudinary.com/jaular/image/upload/v1724540863/blog/sap-pm-mantenimiento-preventivo/ip11-4_h9hlgw.png "IP11 Resumen")
+
+#### Detalle
+
+![IP11 Detalle](https://res.cloudinary.com/jaular/image/upload/v1724540863/blog/sap-pm-mantenimiento-preventivo/ip11-5_pnjr5f.png "IP11 Detalle")
+
+#### Secuencia de paquete
+
+![IP11 Secuencia de paquete](https://res.cloudinary.com/jaular/image/upload/v1724540862/blog/sap-pm-mantenimiento-preventivo/ip11-6_vqa58b.png "IP11 Secuencia de paquete")
+
+### Crear set de ciclos (Cycle Sets)
+
+Código de transacción `IP11Z`
+
+![IP11Z Resumen](https://res.cloudinary.com/jaular/image/upload/v1727183276/blog/sap-pm-mantenimiento-preventivo/ip11z-1_naepwp.png "IP11Z Resumen")
+
+#### Detalle
+
+![IP11Z Detalle](https://res.cloudinary.com/jaular/image/upload/v1727183276/blog/sap-pm-mantenimiento-preventivo/ip11z-2_pid6kr.png "IP11Z Detalle")
+
+## Hoja de ruta
+
+Una hoja de ruta `Task List` de mantenimiento describe esencialmente actividades (operaciones) y contiene los materiales necesarios durante el procesamiento de las actividades.
+
+Si es posible, debe crear hojas de ruta de mantenimiento por instrucción general, lo que le ahorrará tiempo al ingresar y mantener datos. Solo debe crear hojas de ruta de mantenimiento para [equipos](/blog/sap-pm-objectos-tecnicos#equipo) o [ubicaciones técnicas](/blog/sap-pm-objectos-tecnicos#ubicación-técnica) si desea asignar tareas específicas.
+
+### Crear hoja de ruta
+
+Código de transacción `IA05`
+
+![IA05 Acceso](https://res.cloudinary.com/jaular/image/upload/v1725893558/blog/sap-pm-mantenimiento-preventivo/ia05-1_xicoyf.png "IA05 Acceso")
+
+#### Cabecera vista general
+
+Una hoja de ruta de mantenimiento por instrucción general no es específica de un objeto y, como resultado, no está asignada a ningún equipo o ubicación técnica en particular. Sin embargo, puede hacer que indirectamente una hoja de ruta de mantenimiento por instrucción general esté disponible para varios equipos y/o ubicaciones técnicas.
+
+Los equipo y ubicaciones técnicas para las cuales se ingresa un número de material en el campo `Tipo de montaje / ConstType` puede acceder a la hoja de ruta de mantenimiento por instrucción general para las cuales se ingresa el mismo número de material a su vez en el campo `Conjunto / Assembly`.
+
+![IA05 Cabecera vista general](https://res.cloudinary.com/jaular/image/upload/v1725980425/blog/sap-pm-mantenimiento-preventivo/ia05-2_h1cqew.png "IA05 Cabecera vista general")
+
+#### Resumen operaciones
+
+![IA05 Resumen operaciones](https://res.cloudinary.com/jaular/image/upload/v1725976226/blog/sap-pm-mantenimiento-preventivo/ia05-3_lntoqg.png "IA05 Resumen operaciones")
+
+#### Resumen paquetes mantenimiento
+
+![IA05 Resumen paquetes mantenimiento](https://res.cloudinary.com/jaular/image/upload/v1725976225/blog/sap-pm-mantenimiento-preventivo/ia05-4_pigsa8.png "IA05 Resumen paquetes mantenimiento")
+
+#### Resumen componentes
+
+![IA05 Resumen componentes](https://res.cloudinary.com/jaular/image/upload/v1725976225/blog/sap-pm-mantenimiento-preventivo/ia05-5_iu0se8.png "IA05 Resumen componentes")
+
+#### Resumen hojas de ruta
+
+![IA05 Resumen hojas de ruta](https://res.cloudinary.com/jaular/image/upload/v1725894167/blog/sap-pm-mantenimiento-preventivo/ia05-6_gtsuqi.png "IA05 Resumen hojas de ruta")
+
+## Plan ciclo individual
+
+Los planes de ciclo individual `Single Cycle Plans` se utilizan cuando **las actividades de mantenimiento deben realizarse en intervalos regulares**, puede ser por tiempo (cada año) o por rendimiento (cada 200 pulsos).
+
+> En este caso, opcionalmente puede incluir una hoja de ruta de mantenimiento (sin estrategia).
+
+### Crear plan ciclo individual
+
+Código de transacción `IP41`
+
+![IP41 Acceso](https://res.cloudinary.com/jaular/image/upload/v1726172549/blog/sap-pm-mantenimiento-preventivo/ip41-1_uub6os.png "IP41 Acceso")
+
+#### Ciclos plan de mantenimiento
+
+![IP41 Ciclos plan de mantenimiento](https://res.cloudinary.com/jaular/image/upload/v1726256314/blog/sap-pm-mantenimiento-preventivo/ip41-2_l7n6ag.png "IP41 Ciclos plan de mantenimiento")
+
+#### Posición
+
+![IP41 Posición](https://res.cloudinary.com/jaular/image/upload/v1726256315/blog/sap-pm-mantenimiento-preventivo/ip41-3_gsrqfr.png "IP41 Posición")
+
+#### Párametros de programación plan mantenimiento
+
+Si sus ciclos duran más de 1 año, establezca el `Horizonte apertura / Call horizon` en un valor porcentual alto (superior al 80%) para garantizar que las órdenes de mantenimiento no se creen demasiado pronto.
+
+Si desea tener una vista previa de un plan de mantenimiento para todo el año, por ejemplo, configure el `Intervalo de toma / Scheduling period` en 365 días o 12 meses.
+
+Establezca el parámetro `Sujeto a conclusión / Completion Requirement` si desea que el sistema solo genere órdenes posteriores una vez que se haya completado la orden anterior.
+
+![IP41 Párametros de programación plan mantenimiento](https://res.cloudinary.com/jaular/image/upload/v1726756984/blog/sap-pm-mantenimiento-preventivo/ip41-4_xjjyeb.png "IP41 Párametros de programación plan mantenimiento")
+
+### Programar plan ciclo individual
+
+Código de transacción `IP10`
+
+![IP10 Programar plan ciclo individual](https://res.cloudinary.com/jaular/image/upload/v1726251781/blog/sap-pm-mantenimiento-preventivo/ip10-1_tskrvm.png "IP10 Programar plan ciclo individual")
+
+#### Iniciar plan ciclo individual
+
+![IP10 Iniciar plan ciclo individual](https://res.cloudinary.com/jaular/image/upload/v1726251782/blog/sap-pm-mantenimiento-preventivo/ip10-2_orxsa7.png "IP10 Iniciar plan ciclo individual")
+
+#### Llamadas programadas
+
+![IP10 Llamadas programadas](https://res.cloudinary.com/jaular/image/upload/v1726251782/blog/sap-pm-mantenimiento-preventivo/ip10-3_b2yuqo.png "IP10 Llamadas programadas")
+
+#### Liberar toma mantenimiento
+
+![IP10 Liberar toma mantenimiento](https://res.cloudinary.com/jaular/image/upload/v1726252228/blog/sap-pm-mantenimiento-preventivo/ip10-4_s2kmwr.png "IP10 Liberar toma mantenimiento")
+
+#### Visualizar objeto toma
+
+![IP10 Visualizar objeto toma](https://res.cloudinary.com/jaular/image/upload/v1726252227/blog/sap-pm-mantenimiento-preventivo/ip10-5_g8tkws.png "IP10 Visualizar objeto toma")
+
+## Plan estrategia
+
+Los planes de estrategia de mantenimiento `Maintenance Strategy Plans` se utilizan cuando las actividades de mantenimiento se asocian a diferentes periodos para el mismo plan, Puede ser por tiempo (cada 3, 6, 12 meses) o por rendimiento (cada 1000, 1200, 1800km).
+
+> En este caso, debe incluir una hoja de ruta de mantenimiento, específicamente una que tenga la misma estrategia que el plan de mantenimiento.
+
+### Crear plan estrategia
+
+Código de transacción `IP42`
+
+![IP42 Acceso](https://res.cloudinary.com/jaular/image/upload/v1726861376/blog/sap-pm-mantenimiento-preventivo/ip42-1_dpzdek.png "IP42 Acceso")
+
+#### Ciclos plan de mantenimiento
+
+![IP42 Ciclos plan de mantenimiento](https://res.cloudinary.com/jaular/image/upload/v1726861376/blog/sap-pm-mantenimiento-preventivo/ip42-2_axgnta.png "IP42 Ciclos plan de mantenimiento")
+
+#### Posición
+
+![IP42 Posición](https://res.cloudinary.com/jaular/image/upload/v1726861376/blog/sap-pm-mantenimiento-preventivo/ip42-3_pha8ea.png "IP42 Posición")
+
+#### Párametros de programación plan mantenimiento
+
+![IP42 Párametros de programación plan mantenimiento](https://res.cloudinary.com/jaular/image/upload/v1726861376/blog/sap-pm-mantenimiento-preventivo/ip42-4_sojrv4.png "IP42 Párametros de programación plan mantenimiento")
+
+### Programar plan de estrategia
+
+Código de transacción `IP10`
+
+![IP10 Programar plan de estrategia](https://res.cloudinary.com/jaular/image/upload/v1726865614/blog/sap-pm-mantenimiento-preventivo/ip10-6_imvjgt.png "IP10 Programar plan de estrategia")
+
+#### Iniciar plan estrategia
+
+![IP10 Iniciar plan estrategia](https://res.cloudinary.com/jaular/image/upload/v1726865617/blog/sap-pm-mantenimiento-preventivo/ip10-7_mtje3x.png "IP10 Iniciar plan estrategia")
+
+#### Liberar toma mantenimiento
+
+![IP10 Liberar toma mantenimiento](https://res.cloudinary.com/jaular/image/upload/v1726865617/blog/sap-pm-mantenimiento-preventivo/ip10-8_hsazmg.png "IP10 Liberar toma mantenimiento")
+
+## Plan de mantenimiento múltiple
+
+Los planes de mantenimiento múltiple `Multiple Counter Plans` se utilizan en caso de que las actividades de mantenimiento dependan de varios factores (cada 100h, cada 5h de funcionamiento, cada 150km).
+
+> En este caso, opcionalmente puede incluir una hoja de ruta de mantenimiento (sin estrategia).
+
+### Crear plan de mantenimiento múltiple
+
+Código de transacción `IP43`
+
+![IP43 Acceso](https://res.cloudinary.com/jaular/image/upload/v1727184097/blog/sap-pm-mantenimiento-preventivo/ip43-1_wmgfca.png "IP43 Acceso")
+
+#### Ciclos plan de mantenimiento
+
+![IP43 Ciclos plan de mantenimiento](https://res.cloudinary.com/jaular/image/upload/v1727187172/blog/sap-pm-mantenimiento-preventivo/ip43-2_tdrkbk.png "IP43 Ciclos plan de mantenimiento")
+
+#### Posición
+
+![IP43 Posición](https://res.cloudinary.com/jaular/image/upload/v1727184110/blog/sap-pm-mantenimiento-preventivo/ip43-3_scya3l.png "IP43 Posición")
+
+#### Párametros de programación plan mantenimiento
+
+![IP43 Párametros de programación plan mantenimiento](https://res.cloudinary.com/jaular/image/upload/v1727184097/blog/sap-pm-mantenimiento-preventivo/ip43-4_sorvzk.png "IP43 Párametros de programación plan mantenimiento")
+
+### Programar plan de mantenimiento múltiple
+
+Código de transacción `IP10`
+
+![IP10 Programar plan de mantenimiento múltiple](https://res.cloudinary.com/jaular/image/upload/v1727185778/blog/sap-pm-mantenimiento-preventivo/ip10-9_wscxw6.png "IP10 Programar plan de mantenimiento múltiple")
+
+#### Iniciar plan de mantenimiento múltiple
+
+![IP10 Iniciar plan de mantenimiento múltiple](https://res.cloudinary.com/jaular/image/upload/v1727185783/blog/sap-pm-mantenimiento-preventivo/ip10-10_xm2z7l.png "IP10 Iniciar plan de mantenimiento múltiple")
+
+#### Liberar toma mantenimiento
+
+![IP10 Liberar toma mantenimiento](https://res.cloudinary.com/jaular/image/upload/v1727185824/blog/sap-pm-mantenimiento-preventivo/ip10-11_q9i1la.png "IP10 Liberar toma mantenimiento")
+
+## Órdenes y notificaciones
+
+### Modificar órdenes y operaciones
+
+Código de transacción `IW37N`
+
+![IW37N Selección de pedidos y operaciones](https://res.cloudinary.com/jaular/image/upload/v1726683393/blog/sap-pm-mantenimiento-preventivo/iw37n-1_jejvwz.png "IW37N Selección de pedidos y operaciones")
+
+#### Lista de pedidos y operaciones
+
+![IW37N Lista de pedidos y operaciones](https://res.cloudinary.com/jaular/image/upload/v1726683393/blog/sap-pm-mantenimiento-preventivo/iw37n-2_r7a9o5.png "IW37N Lista de pedidos y operaciones")
+
+#### Modificar orden de mantenimiento
+
+| Status sistema | Texto                                                        |
+| -------------- | ------------------------------------------------------------ |
+| ABIE / CRTD    | Abiertos / Created                                           |
+| DMNV / MANC    | Dispon.material no verificada / Mat.availability not checked |
+| PREC / PRC     | Precálculo del coste / Pre-costed                            |
+| KKMP / NMAT    | Sin componentes de material / No material components         |
+| LIB. / REL     | Liberados / Released                                         |
+| MACO / MACM    | Material confirmado / Material committed                     |
+| MOVM / GMPS    | Mov.mercancías ejecutado / Goods movement posted             |
+| NLIQ / SETC    | Norma de liquidación entrada / Settlement rule created       |
+| JBFI / JBFI    | Job finalizado / Job Finished                                |
+| NOTI / CNF     | Notificado / Confirmed                                       |
+| CTEC / TECO    | Cerrado técnicamente / Technically completed                 |
+| FENA / NTUP    | Fechas no actuales / Dates are not updated                   |
+
+![IW32 Modificar orden de mantenimiento](https://res.cloudinary.com/jaular/image/upload/v1726683589/blog/sap-pm-mantenimiento-preventivo/iw32-1_zgz6wx.png "IW32 Modificar orden de mantenimiento")
+
+### Salida de mercancías reserva
+
+Código de transacción `MIGO` / Clase de movimiento `261`
+
+![MIGO Salida de mercancías por reserva](https://res.cloudinary.com/jaular/image/upload/v1726686065/blog/sap-pm-mantenimiento-preventivo/migo-261_ocqgrl.png "MIGO Salida de mercancías por reserva")
+
+### Fijar status usuario a programada
+
+Código de transacción `IW32`
+
+![IW32 Fijar status usuarios](https://res.cloudinary.com/jaular/image/upload/v1726754363/blog/sap-pm-mantenimiento-preventivo/iw32-2_s8zjlx.png "IW32 Fijar status usuarios")
+
+### Información de disponibilidad material (Opcional)
+
+Código de transacción `IW32`
+
+Acceso: `Orden / Order` -> `Funciones / Functions` -> `Disponibilidad / Availability` -> `Lista de disponibilidad / Availability List`
+
+![IW32 Información de disponibilidad material](https://res.cloudinary.com/jaular/image/upload/v1726754362/blog/sap-pm-mantenimiento-preventivo/iw32-3_cum5ro.png "IW32 Información de disponibilidad material")
+
+### Notificación individual
+
+Código de transacción `IW41`
+
+![IW41 Imagen inicial](https://res.cloudinary.com/jaular/image/upload/v1726771995/blog/sap-pm-mantenimiento-preventivo/iw41-1_hphet2.png "IW41 Imagen inicial")
+
+#### Datos reales
+
+![IW41 Datos reales](https://res.cloudinary.com/jaular/image/upload/v1726771995/blog/sap-pm-mantenimiento-preventivo/iw41-2_fllsh6.png "IW41 Datos reales")
+
+### Cierre técnico
+
+Código de transacción `IW32`
+
+![IW32 Cierre técnico](https://res.cloudinary.com/jaular/image/upload/v1726772397/blog/sap-pm-mantenimiento-preventivo/iw32-4_fhbk4t.png "IW32 Cierre técnico")
+
+## Transacciones
+
+- `IP11` Estrategias de mantenimiento
+- `IA01 /02-03` Hoja de ruta par equipo
+- `IA05 /06-07` Hoja de ruta por instrucción general
+- `IA11 /12-13` Hoja de ruta para ubicación técnica
+- `IP41` Plan ciclo individual
+- `IP42` Plan estrategia
+- `IP43` Plan de mantenimiento múltiple
+- `IP10` Programar plan de mantenimiento
+- `IW37N` Modificar órdenes y operaciones
+- `IW31 /02-03` Orden de mantenimiento
+- `IW41` Notificación individual
+- `IW42` Notificación global
+
+## Referencias
+
+- [Plant Maintenance with SAP S/4HANA](https://www.sap-press.com/plant-maintenance-with-sap-s4hana-business-user-guide_5180/)
+- [ERProof](https://erproof.com/)
+- [Predictiva21](https://predictiva21.com/)
+- [Key User Training](https://keyusertraining.com/)
+- [SAP Help Portal](https://help.sap.com/docs/SAP_ERP/61f8c51bfee94fa78c8835db685249eb/3582c253d0a4b54ce10000000a174cb4.html?locale=en-US&version=6.18.latest)
